@@ -1,0 +1,13 @@
+body {
+        background-image: url('assets/spaceInvaders.jpg');
+        background-size: cover;
+}
+
+#game {
+	background-color: #fff;
+	border: 1px solid #aaa;
+	position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+}
