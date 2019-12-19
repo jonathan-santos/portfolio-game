@@ -3,6 +3,17 @@ const ctx = canvas.getContext('2d')
 
 let gameLoop;
 
+const drawImageRotated = (obj, img) => {
+    let x = obj.x + obj.size / 2
+    let y = obj.y + obj.size /2
+    const to_radians = Math.PI/180
+    ctx.translate(x, y)
+    ctx.rotate(obj.direction * to_radians)
+    ctx.drawImage(img, -obj.size/2, -obj.size/2, obj.size, obj.size)
+    ctx.rotate(-obj.direction * to_radians)
+    ctx.translate(-x, -y)
+}
+
 const character = {
     x: 0,
     y: 0,
@@ -15,14 +26,7 @@ const character = {
     direction: 0,
 
     draw: function() {
-        let x = this.x + this.size / 2
-        let y = this.y + this.size /2
-        const to_radians = Math.PI/180
-        ctx.translate(x, y)
-        ctx.rotate(this.direction * to_radians)
-        ctx.drawImage(this.sprite, -this.size/2, -this.size/2, this.size, this.size)
-        ctx.rotate(-this.direction * to_radians)
-        ctx.translate(-x, -y)
+        drawImageRotated(this, this.sprite)
     },
 
     changeDirection: function() {
@@ -166,7 +170,7 @@ const game = () => {
     player.draw()
     enemy.draw()
 
-    sword.draw()
+    // sword.draw()
 
     player.move()
     enemy.moveToPlayer()
